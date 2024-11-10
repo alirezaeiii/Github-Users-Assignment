@@ -9,9 +9,10 @@ import SwiftUI
 
 @main
 struct NetworkingAssignmentApp: App {
+    let viewModel = GithubViewModel()
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(viewModel: viewModel)
         }
     }
 }
