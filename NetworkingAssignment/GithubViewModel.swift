@@ -20,7 +20,7 @@ class GithubViewModel: ObservableObject {
     
     func refresh() {
         result = Resource.loading
-        Task {
+        Task { @MainActor in
             do {
                 result = try await Resource.success(apiService.getUser())
             } catch GHError.invalidURL {
