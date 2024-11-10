@@ -9,7 +9,7 @@ import Foundation
 
 struct APIService {
     
-    func getUser() async throws  -> GithubUser {
+    func getUser() async throws  -> [GithubUser] {
         
         guard let url = URL(string: Constants.endPoint) else { throw GHError.invalidURL }
         
@@ -22,14 +22,14 @@ struct APIService {
         do {
             let decoder = JSONDecoder()
             decoder.keyDecodingStrategy = .convertFromSnakeCase
-            return try decoder.decode(GithubUser.self, from: data)
+            return try decoder.decode([GithubUser].self, from: data)
         } catch {
             throw GHError.invalidData
         }
     }
     
     private struct Constants {
-        static let endPoint = "https://api.github.com/users/alirezaeiii"
+        static let endPoint = "https://api.github.com/users/alirezaeiii/followers"
     }
     
     enum GHError: Error {

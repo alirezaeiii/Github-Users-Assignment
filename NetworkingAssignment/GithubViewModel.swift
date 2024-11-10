@@ -37,7 +37,7 @@ class GithubViewModel: ObservableObject {
     
     enum Resource {
         case loading
-        case success(GithubUser)
+        case success([GithubUser])
         case error(String)
     }
 }

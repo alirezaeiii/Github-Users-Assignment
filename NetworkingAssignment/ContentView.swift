@@ -23,30 +23,33 @@ struct ContentView: View {
                     viewModel.refresh()
                 }
             }
-        case Resource.success(let user):
-            VStack(spacing: 20) {
-                AsyncImage(url: URL(string: user.avatarUrl)) { image in
-                    image
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .clipShape(Circle())
-                } placeholder: {
-                    Circle()
-                        .foregroundColor(.secondary)
-                        .frame(width: 120, height: 120)
+        case Resource.success(let users):
+            ScrollView {
+                LazyVGrid(columns: [GridItem(.adaptive(minimum: Constants.gridSize))]) {
+                    ForEach(users, id: \.self.login) { user in
+                        VStack {
+                            AsyncImage(url: URL(string: user.avatarUrl)) { image in
+                                image
+                                    .frame(width: Constants.radius, height: Constants.radius)
+                                    .clipShape(RoundedRectangle(cornerRadius: Constants.cornerRadius))
+                            } placeholder: {
+                                RoundedRectangle(cornerRadius: Constants.cornerRadius)
+                                    .foregroundColor(.secondary)
+                                    .frame(width: Constants.radius, height: Constants.radius)
+                            }
+                            Text(user.login)
+                                .font(.title3)
+                        }.padding()
+                    }
                 }
-                
-                Text(user.login)
-                    .bold()
-                    .font(.title3)
-                
-                Text(user.bio ?? "Bio Placeholder")
-                    .padding()
-                
-                Spacer()
             }
-            .padding()
         }
+    }
+    
+    private struct Constants {
+        static let gridSize: Double = 180
+        static let cornerRadius: Double = 10
+        static let radius: Double = 160
     }
 }
 
