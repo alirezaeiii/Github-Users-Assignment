@@ -19,31 +19,35 @@ struct ContentView: View {
             VStack {
                 Text(message)
                     .padding(.vertical)
-                Button("Refresh") {
+                Button("Retry") {
                     viewModel.refresh()
                 }
             }
-        case Resource.success(let users):
+        case Resource.success(let userWrappers):
             let shape = RoundedRectangle(cornerRadius: Constants.cornerRadius)
             NavigationStack {
                 ScrollView {
                     LazyVGrid(columns: [GridItem(.adaptive(minimum: Constants.gridItemSize))]) {
-                        ForEach(users, id: \.self.login) { user in
-                            NavigationLink(value: user)  {
-                                VStack {
-                                    AsyncImage(url: URL(string: user.avatarUrl)) { image in
-                                        image
-                                            .resizable()
-                                            .scaledToFit()
-                                            .frame(width: Constants.frameSize, height: Constants.frameSize)
-                                            .clipShape(shape)
-                                    } placeholder: {
-                                        shape.foregroundColor(.secondary)
-                                            .frame(width: Constants.frameSize, height: Constants.frameSize)
+                        ForEach(userWrappers) { userWrapper in
+                            Section(userWrapper.section) {
+                                ForEach(userWrapper.users, id: \.self.login) { user in
+                                    NavigationLink(value: user)  {
+                                        VStack {
+                                            AsyncImage(url: URL(string: user.avatarUrl)) { image in
+                                                image
+                                                    .resizable()
+                                                    .scaledToFit()
+                                                    .frame(width: Constants.frameSize, height: Constants.frameSize)
+                                                    .clipShape(shape)
+                                            } placeholder: {
+                                                shape.foregroundColor(.secondary)
+                                                    .frame(width: Constants.frameSize, height: Constants.frameSize)
+                                            }
+                                            Text(user.login)
+                                                .font(.title3)
+                                        }.padding()
                                     }
-                                    Text(user.login)
-                                        .font(.title3)
-                                }.padding()
+                                }
                             }
                         }
                     }.navigationDestination(for: GithubUser.self) { user in

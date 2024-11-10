@@ -21,8 +21,11 @@ class GithubViewModel: ObservableObject {
     func refresh() {
         result = Resource.loading
         Task { @MainActor in
+            async let following = apiService.getUsers(endPoint: Constants.followingEndPoint)
+            async let followers = apiService.getUsers(endPoint: Constants.followersEndPoint)
             do {
-                result = try await Resource.success(apiService.getUser())
+                let (fetchedFollowing, fetchedFollowers) = try await (following, followers)
+                result = Resource.success(UserWrapper.createUsers(following: fetchedFollowing, followers: fetchedFollowers))
             } catch GHError.invalidURL {
                 result = Resource.error("Invalid URL")
             } catch GHError.invalidResponse {
@@ -35,9 +38,15 @@ class GithubViewModel: ObservableObject {
         }
     }
     
+    private struct Constants {
+        static let endPoint = "https://api.github.com/users/alirezaeiii/"
+        static let followingEndPoint = endPoint + "following"
+        static let followersEndPoint = endPoint + "followers"
+    }
+    
     enum Resource {
         case loading
-        case success([GithubUser])
+        case success([UserWrapper])
         case error(String)
     }
 }

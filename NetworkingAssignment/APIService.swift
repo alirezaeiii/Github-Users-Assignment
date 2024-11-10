@@ -9,9 +9,9 @@ import Foundation
 
 struct APIService {
     
-    func getUser() async throws  -> [GithubUser] {
+    func getUsers(endPoint: String) async throws -> [GithubUser] {
         
-        guard let url = URL(string: Constants.endPoint) else { throw GHError.invalidURL }
+        guard let url = URL(string: endPoint) else { throw GHError.invalidURL }
         
         let (data, response) = try await URLSession.shared.data(from: url)
         
@@ -26,10 +26,6 @@ struct APIService {
         } catch {
             throw GHError.invalidData
         }
-    }
-    
-    private struct Constants {
-        static let endPoint = "https://api.github.com/users/alirezaeiii/followers"
     }
     
     enum GHError: Error {

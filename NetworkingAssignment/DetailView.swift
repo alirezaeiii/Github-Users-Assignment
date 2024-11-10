@@ -30,7 +30,6 @@ struct DetailView: View {
     }
     
     private struct Constants {
-        static let cornerRadius: Double = 10
         static let frameSize: Double = 360
     }
 }
