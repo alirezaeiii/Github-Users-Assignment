@@ -20,9 +20,7 @@ struct DetailView: View {
                 Rectangle()
                     .foregroundColor(.secondary)
                     .frame(width: Constants.frameSize, height: Constants.frameSize)
-            }.padding()
-            Text(user.bio ?? "No Bio")
-                .padding()
+            }
             Spacer()
         }
         .navigationTitle(user.login)
@@ -35,7 +33,7 @@ struct DetailView: View {
 }
 
 #Preview {
-    let user = GithubUser(login: "Ali", avatarUrl: "https://avatars.githubusercontent.com/u/2465559?v=4", bio: "Bio")
+    let user = GithubUser(login: "Ali", avatarUrl: "https://avatars.githubusercontent.com/u/2465559?v=4")
     return NavigationStack {
         DetailView(user: user)
     }

@@ -10,5 +10,4 @@ import Foundation
 struct GithubUser: Codable, Hashable {
     let login: String
     let avatarUrl: String
-    let bio: String?
 }
