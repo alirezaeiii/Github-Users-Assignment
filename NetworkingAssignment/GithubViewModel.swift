@@ -39,7 +39,7 @@ class GithubViewModel: ObservableObject {
     }
     
     private struct Constants {
-        static let endPoint = "https://api.github.com/users/alirezaeiii/"
+        private static let endPoint = "https://api.github.com/users/alirezaeiii/"
         static let followingEndPoint = endPoint + "following"
         static let followersEndPoint = endPoint + "followers"
     }
