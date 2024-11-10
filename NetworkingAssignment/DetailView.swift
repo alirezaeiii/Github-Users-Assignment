@@ -8,11 +8,36 @@
 import SwiftUI
 
 struct DetailView: View {
+    let user: GithubUser
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            AsyncImage(url: URL(string: user.avatarUrl)) { image in
+                image
+                    .resizable()
+                    .scaledToFit()
+            } placeholder: {
+                Rectangle()
+                    .foregroundColor(.secondary)
+                    .frame(width: Constants.radius, height: Constants.radius)
+            }.padding()
+            Text(user.bio ?? "No Bio")
+                .padding()
+            Spacer()
+        }
+        .navigationTitle(user.login)
+        .navigationBarTitleDisplayMode(.inline)
+    }
+    
+    private struct Constants {
+        static let cornerRadius: Double = 10
+        static let radius: Double = 360
     }
 }
 
 #Preview {
-    DetailView()
+    let user = GithubUser(login: "Ali", avatarUrl: "https://avatars.githubusercontent.com/u/2465559?v=4", bio: "Bio")
+    return NavigationStack {
+        DetailView(user: user)
+    }
 }

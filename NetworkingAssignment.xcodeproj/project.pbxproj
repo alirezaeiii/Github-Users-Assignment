@@ -14,6 +14,7 @@
 		41901C792CE0B889006830BA /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41901C782CE0B889006830BA /* APIService.swift */; };
 		41901C7B2CE0B95B006830BA /* GithubViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41901C7A2CE0B95B006830BA /* GithubViewModel.swift */; };
 		41901C7D2CE0B99E006830BA /* GithubUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41901C7C2CE0B99E006830BA /* GithubUser.swift */; };
+		41901C7F2CE1173A006830BA /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41901C7E2CE1173A006830BA /* DetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +26,7 @@
 		41901C782CE0B889006830BA /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		41901C7A2CE0B95B006830BA /* GithubViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubViewModel.swift; sourceTree = "<group>"; };
 		41901C7C2CE0B99E006830BA /* GithubUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubUser.swift; sourceTree = "<group>"; };
+		41901C7E2CE1173A006830BA /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +64,7 @@
 				41901C7C2CE0B99E006830BA /* GithubUser.swift */,
 				41901C6A2CDFDF34006830BA /* NetworkingAssignmentApp.swift */,
 				41901C6C2CDFDF34006830BA /* ContentView.swift */,
+				41901C7E2CE1173A006830BA /* DetailView.swift */,
 				41901C6E2CDFDF35006830BA /* Assets.xcassets */,
 				41901C702CDFDF35006830BA /* Preview Content */,
 			);
@@ -147,6 +150,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				41901C6D2CDFDF34006830BA /* ContentView.swift in Sources */,
+				41901C7F2CE1173A006830BA /* DetailView.swift in Sources */,
 				41901C792CE0B889006830BA /* APIService.swift in Sources */,
 				41901C6B2CDFDF34006830BA /* NetworkingAssignmentApp.swift in Sources */,
 				41901C7D2CE0B99E006830BA /* GithubUser.swift in Sources */,

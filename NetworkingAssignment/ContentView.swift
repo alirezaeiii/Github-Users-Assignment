@@ -24,32 +24,41 @@ struct ContentView: View {
                 }
             }
         case Resource.success(let users):
-            ScrollView {
-                LazyVGrid(columns: [GridItem(.adaptive(minimum: Constants.gridSize))]) {
-                    ForEach(users, id: \.self.login) { user in
-                        VStack {
-                            AsyncImage(url: URL(string: user.avatarUrl)) { image in
-                                image
-                                    .frame(width: Constants.radius, height: Constants.radius)
-                                    .clipShape(RoundedRectangle(cornerRadius: Constants.cornerRadius))
-                            } placeholder: {
-                                RoundedRectangle(cornerRadius: Constants.cornerRadius)
-                                    .foregroundColor(.secondary)
-                                    .frame(width: Constants.radius, height: Constants.radius)
+            let shape = RoundedRectangle(cornerRadius: Constants.cornerRadius)
+            NavigationStack {
+                ScrollView {
+                    LazyVGrid(columns: [GridItem(.adaptive(minimum: Constants.gridItemSize))]) {
+                        ForEach(users, id: \.self.login) { user in
+                            NavigationLink(value: user)  {
+                                VStack {
+                                    AsyncImage(url: URL(string: user.avatarUrl)) { image in
+                                        image
+                                            .resizable()
+                                            .scaledToFit()
+                                            .frame(width: Constants.frameSize, height: Constants.frameSize)
+                                            .clipShape(shape)
+                                    } placeholder: {
+                                        shape.foregroundColor(.secondary)
+                                            .frame(width: Constants.frameSize, height: Constants.frameSize)
+                                    }
+                                    Text(user.login)
+                                        .font(.title3)
+                                }.padding()
                             }
-                            Text(user.login)
-                                .font(.title3)
-                        }.padding()
+                        }
+                    }.navigationDestination(for: GithubUser.self) { user in
+                        DetailView(user: user)
                     }
+                    .navigationTitle("List")
                 }
             }
         }
     }
     
     private struct Constants {
-        static let gridSize: Double = 180
+        static let gridItemSize: Double = 180
         static let cornerRadius: Double = 10
-        static let radius: Double = 160
+        static let frameSize: Double = 160
     }
 }
 
