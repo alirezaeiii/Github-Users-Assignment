@@ -19,7 +19,7 @@ struct DetailView: View {
             } placeholder: {
                 Rectangle()
                     .foregroundColor(.secondary)
-                    .frame(width: Constants.radius, height: Constants.radius)
+                    .frame(width: Constants.frameSize, height: Constants.frameSize)
             }.padding()
             Text(user.bio ?? "No Bio")
                 .padding()
@@ -31,7 +31,7 @@ struct DetailView: View {
     
     private struct Constants {
         static let cornerRadius: Double = 10
-        static let radius: Double = 360
+        static let frameSize: Double = 360
     }
 }
 
