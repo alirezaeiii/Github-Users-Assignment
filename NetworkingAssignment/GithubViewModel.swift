@@ -7,11 +7,11 @@
 
 import Foundation
 
-class GithubViewModel : BaseViewModel<[UserWrapper]> {
+class GithubViewModel : BaseViewModel<[UserWrapper], [GithubUser]> {
     
     override func getSuccessResult() async throws -> [UserWrapper] {
-        async let following = apiService.getUsers(endPoint: Constants.followingEndPoint)
-        async let followers = apiService.getUsers(endPoint: Constants.followersEndPoint)
+        async let following = apiService.getDataFromRemote(endPoint: Constants.followingEndPoint)
+        async let followers = apiService.getDataFromRemote(endPoint: Constants.followersEndPoint)
         return try await UserWrapper.createUsers(following: following, followers: followers)
     }
     

@@ -7,9 +7,9 @@
 
 import Foundation
 
-struct APIService {
+struct APIService<T: Decodable> {
     
-    func getUsers(endPoint: String) async throws -> [GithubUser] {
+    func getDataFromRemote(endPoint: String) async throws -> T {
         
         guard let url = URL(string: endPoint) else { throw GHError.invalidURL }
         
@@ -22,7 +22,7 @@ struct APIService {
         do {
             let decoder = JSONDecoder()
             decoder.keyDecodingStrategy = .convertFromSnakeCase
-            return try decoder.decode([GithubUser].self, from: data)
+            return try decoder.decode(T.self, from: data)
         } catch {
             throw GHError.invalidData
         }
