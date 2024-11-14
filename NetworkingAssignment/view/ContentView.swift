@@ -24,7 +24,6 @@ struct ContentView: View {
                 }
             }
         case Resource.success(let userWrappers):
-            let shape = RoundedRectangle(cornerRadius: Constants.cornerRadius)
             NavigationStack {
                 ScrollView {
                     LazyVGrid(columns: [GridItem(.adaptive(minimum: Constants.gridItemSize))]) {
@@ -32,20 +31,7 @@ struct ContentView: View {
                             Section(userWrapper.section) {
                                 ForEach(userWrapper.users, id: \.self.login) { user in
                                     NavigationLink(value: user)  {
-                                        VStack {
-                                            AsyncImage(url: URL(string: user.avatarUrl)) { image in
-                                                image
-                                                    .resizable()
-                                                    .scaledToFit()
-                                                    .frame(width: Constants.frameSize, height: Constants.frameSize)
-                                                    .clipShape(shape)
-                                            } placeholder: {
-                                                shape.foregroundColor(.secondary)
-                                                    .frame(width: Constants.frameSize, height: Constants.frameSize)
-                                            }
-                                            Text(user.login)
-                                                .font(.title3)
-                                        }.padding()
+                                        UserItemView(user: user)
                                     }
                                 }
                             }
