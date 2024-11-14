@@ -47,8 +47,6 @@ struct ContentView: View {
     
     private struct Constants {
         static let gridItemSize: Double = 180
-        static let cornerRadius: Double = 10
-        static let frameSize: Double = 160
     }
 }
 
