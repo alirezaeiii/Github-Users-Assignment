@@ -19,7 +19,7 @@ struct DetailView: View {
             } placeholder: {
                 Rectangle()
                     .foregroundColor(.secondary)
-                    .frame(width: Constants.frameSize, height: Constants.frameSize)
+                    .frame(height: Constants.frameHeight)
             }
             Spacer()
         }
@@ -28,7 +28,7 @@ struct DetailView: View {
     }
     
     private struct Constants {
-        static let frameSize: Double = 360
+        static let frameHeight: Double = 400
     }
 }
 
