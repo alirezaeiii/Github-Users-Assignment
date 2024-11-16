@@ -7,9 +7,7 @@
 
 import Foundation
 
-class BaseViewModel<T, R:Codable>: ObservableObject {
-    typealias GHError = APIService<R>.GHError
-    
+class BaseViewModel<T, R : Codable>: ObservableObject {
     @Published var result = Resource.loading
     
     let apiService = APIService<R>()

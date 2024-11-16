@@ -6,8 +6,12 @@
 //
 
 import Foundation
+import OSLog
 
 class GithubViewModel : BaseViewModel<[UserWrapper], [GithubUser]> {
+    
+    /// A logger for debugging.
+        fileprivate let logger = Logger(subsystem: "com.sample.NetworkingAssignment", category: "parsing")
     
     override init() {
         super.init()
@@ -20,16 +24,13 @@ class GithubViewModel : BaseViewModel<[UserWrapper], [GithubUser]> {
             async let following = apiService.getDataFromRemote(endPoint: Constants.followingEndPoint)
             async let followers = apiService.getDataFromRemote(endPoint: Constants.followersEndPoint)
             do {
+                logger.debug("Refreshing the data ...")
                 let (fetchedFollowing, fetchedFollowers) = try await (following, followers)
                 result = Resource.success(UserWrapper.createUsers(following: fetchedFollowing, followers: fetchedFollowers))
-            } catch GHError.invalidURL {
-                result = Resource.error("Invalid URL")
-            } catch GHError.invalidResponse {
-                result = Resource.error("Invalid response")
-            } catch GHError.invalidData {
-                result = Resource.error("Invalid data")
+                logger.debug("Refresh complete.")
             } catch {
-                result = Resource.error("Unexpected error")
+                logger.error("\(error.localizedDescription)")
+                result = Resource.error("Something went wrong")
             }
         }
     }

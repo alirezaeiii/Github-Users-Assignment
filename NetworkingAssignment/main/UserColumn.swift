@@ -1,5 +1,5 @@
 //
-//  UserItemView.swift
+//  UserColumn.swift
 //  NetworkingAssignment
 //
 //  Created by Ali on 11/15/24.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct UserItemView: View {
+struct UserColumn: View {
     let user: GithubUser
     
     var body: some View {
@@ -36,5 +36,5 @@ struct UserItemView: View {
 
 #Preview {
     let user = GithubUser(login: "Ali", avatarUrl: "https://avatars.githubusercontent.com/u/2465559?v=4")
-    return UserItemView(user: user)
+    return UserColumn(user: user)
 }

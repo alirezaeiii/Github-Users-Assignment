@@ -31,7 +31,7 @@ struct ContentView: View {
                             Section(userWrapper.section) {
                                 ForEach(userWrapper.users, id: \.self.login) { user in
                                     NavigationLink(value: user)  {
-                                        UserItemView(user: user)
+                                        UserColumn(user: user)
                                     }
                                 }
                             }
