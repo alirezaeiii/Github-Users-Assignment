@@ -7,11 +7,13 @@
 
 import Foundation
 
-struct UserWrapper: Identifiable {
+struct UserWrapper {
     let section: String
     let users: [GithubUser]
     let id: UUID
-    
+}
+
+extension UserWrapper {
     static func createUsers(following: [GithubUser], followers: [GithubUser]) -> [UserWrapper] {
         var items = Array<UserWrapper>()
         items.append(UserWrapper(section: "Following", users: following, id: UUID()))
@@ -19,3 +21,6 @@ struct UserWrapper: Identifiable {
         return items
     }
 }
+
+// Ensure that the model's conformance to Identifiable is public.
+extension UserWrapper : Identifiable {}
