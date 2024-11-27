@@ -39,7 +39,8 @@ struct ContentView: View {
 }
 
 #Preview {
-    let viewModel = MainViewModel()
+    let networkService = NetworkService()
+    let viewModel = MainViewModel(networkService: networkService)
     @State var navigationPath = [NavigationPath]()
     return NavigationStack {
         ContentView(viewModel: viewModel, navigationPath: $navigationPath)

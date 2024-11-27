@@ -9,19 +9,23 @@ import Foundation
 import OSLog
 
 class MainViewModel : ObservableObject {
+    private let networkService: NetworkServiceProtocol
     
     @Published var viewState: ViewState = .loading
     @Published var users: [UserWrapper] = []
     
-    init() {
+    init(networkService: NetworkServiceProtocol) {
+        self.networkService = networkService
         refresh()
     }
     
     func refresh() {
         viewState = .loading
+        let followingRequest = GithubRequest(path: .following)
+        let followersRequest = GithubRequest(path: .followers)
         Task { @MainActor in
-            async let following = GithubUser.getUsers(endPoint: Constants.followingEndPoint)
-            async let followers = GithubUser.getUsers(endPoint: Constants.followersEndPoint)
+            async let following: [GithubUser] = networkService.perform(request: followingRequest)
+            async let followers: [GithubUser] = networkService.perform(request: followersRequest)
             do {
                 let (fetchedFollowing, fetchedFollowers) = try await (following, followers)
                 users = UserWrapper.createUsers(following: fetchedFollowing, followers: fetchedFollowers)
@@ -31,10 +35,5 @@ class MainViewModel : ObservableObject {
             }
         }
     }
-    
-    private struct Constants {
-        private static let endPoint = "https://api.github.com/users/alirezaeiii/"
-        static let followingEndPoint = endPoint + "following"
-        static let followersEndPoint = endPoint + "followers"
-    }
+
 }

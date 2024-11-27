@@ -44,7 +44,8 @@ struct DetailView: View {
 
 #Preview {
     let user = GithubUser(login: "Ali", avatarUrl: "https://avatars.githubusercontent.com/u/2465559?v=4", bio: "Bio")
-    let viewModel = DetailViewModel(githubUser: user)
+    let networkService = NetworkService()
+    let viewModel = DetailViewModel(networkService: networkService, githubUser: user)
     return NavigationStack {
         DetailView(viewModel: viewModel)
     }

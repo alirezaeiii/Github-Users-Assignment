@@ -8,29 +8,28 @@
 import Foundation
 
 class DetailViewModel: ObservableObject {
+    private let networkService: NetworkServiceProtocol
     let githubUser: GithubUser
     
     @Published var viewState: ViewState = .loading
     @Published var user: GithubUser?
     
-    init(githubUser: GithubUser) {
+    init(networkService: NetworkServiceProtocol, githubUser: GithubUser) {
+        self.networkService = networkService
         self.githubUser = githubUser
         refresh()
     }
     
     func refresh() {
         viewState = .loading
+        let request = GithubRequest(path: .user(login: githubUser.login))
         Task { @MainActor in
             do {
-                user = try await GithubUser.getUser(endPoint: Constants.endPoint + githubUser.login)
+                user = try await networkService.perform(request: request)
                 self.viewState = .completed
             } catch {
                 viewState = .failure(error: error)
             }
         }
-    }
-    
-    private struct Constants {
-        static let endPoint = "https://api.github.com/users/"
     }
 }

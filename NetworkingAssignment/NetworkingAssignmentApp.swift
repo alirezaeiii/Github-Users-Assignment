@@ -15,20 +15,20 @@ enum NavigationPath: Hashable {
 @main
 struct NetworkingAssignmentApp: App {
     
+    private let networkService: NetworkServiceProtocol = NetworkService()
     @State private var navigationPaths = [NavigationPath]()
     
     var body: some Scene {
         WindowGroup {
             NavigationStack(path: $navigationPaths) {
-                ContentView(viewModel: MainViewModel(), navigationPath: $navigationPaths)
+                ContentView(viewModel: .init(networkService: networkService), navigationPath: $navigationPaths)
                     .navigationDestination(for: NavigationPath.self) { path in
                         switch path {
                         case .list:
-                            ContentView(viewModel: MainViewModel(), navigationPath: $navigationPaths)
+                            ContentView(viewModel: .init(networkService: networkService), navigationPath: $navigationPaths)
                         case .detail(user:  let user):
-                            DetailView(viewModel: DetailViewModel(githubUser: user))
+                            DetailView(viewModel: .init(networkService: networkService, githubUser: user))
                         }
-                        
                     }
             }
         }
