@@ -12,24 +12,28 @@ struct DetailView: View {
     @ObservedObject var viewModel: DetailViewModel
     
     var body: some View {
-        if let user = viewModel.user {
-            VStack {
-                AsyncImage(url: URL(string: user.avatarUrl)) { image in
-                    image
-                        .resizable()
-                        .scaledToFit()
-                } placeholder: {
-                    Rectangle()
-                        .foregroundColor(.secondary)
-                        .frame(height: Constants.frameHeight)
+        AsyncContentView(viewState: viewModel.viewState) {
+                VStack {
+                    if let user = viewModel.user {
+                        AsyncImage(url: URL(string: user.avatarUrl)) { image in
+                            image
+                                .resizable()
+                                .scaledToFit()
+                        } placeholder: {
+                            Rectangle()
+                                .foregroundColor(.secondary)
+                                .frame(height: Constants.frameHeight)
+                        }
+                        if let bio = user.bio {
+                            Text(bio).padding()
+                        }
+                    }
+                    Spacer()
                 }
-                if let bio = user.bio {
-                    Text(bio).padding()
-                }
-                Spacer()
-            }
-            .navigationTitle(user.login)
-            .navigationBarTitleDisplayMode(.inline)
+                .navigationTitle(viewModel.user?.login ?? "")
+                .navigationBarTitleDisplayMode(.inline)
+        } onRetry: {
+            viewModel.refresh()
         }
     }
     
