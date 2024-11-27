@@ -7,12 +7,30 @@
 
 import SwiftUI
 
+enum NavigationPath: Hashable {
+    case list
+    case detail(user: GithubUser)
+}
+
 @main
 struct NetworkingAssignmentApp: App {
-    let viewModel = GithubViewModel()
+    
+    @State private var navigationPaths = [NavigationPath]()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView(viewModel: viewModel)
+            NavigationStack(path: $navigationPaths) {
+                ContentView(viewModel: MainViewModel(), navigationPath: $navigationPaths)
+                    .navigationDestination(for: NavigationPath.self) { path in
+                        switch path {
+                        case .list:
+                            ContentView(viewModel: MainViewModel(), navigationPath: $navigationPaths)
+                        case .detail(user:  let user):
+                            DetailView(viewModel: DetailViewModel(githubUser: user))
+                        }
+                        
+                    }
+            }
         }
     }
 }

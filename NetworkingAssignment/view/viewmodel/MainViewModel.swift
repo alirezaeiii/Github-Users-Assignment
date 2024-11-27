@@ -8,7 +8,7 @@
 import Foundation
 import OSLog
 
-class GithubViewModel : ObservableObject {
+class MainViewModel : ObservableObject {
     
     @Published var viewState: ViewState = .loading
     @Published var users: [UserWrapper] = []

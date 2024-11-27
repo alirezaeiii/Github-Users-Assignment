@@ -8,23 +8,29 @@
 import SwiftUI
 
 struct DetailView: View {
-    let user: GithubUser
+    
+    @ObservedObject var viewModel: DetailViewModel
     
     var body: some View {
-        VStack {
-            AsyncImage(url: URL(string: user.avatarUrl)) { image in
-                image
-                    .resizable()
-                    .scaledToFit()
-            } placeholder: {
-                Rectangle()
-                    .foregroundColor(.secondary)
-                    .frame(height: Constants.frameHeight)
+        if let user = viewModel.user {
+            VStack {
+                AsyncImage(url: URL(string: user.avatarUrl)) { image in
+                    image
+                        .resizable()
+                        .scaledToFit()
+                } placeholder: {
+                    Rectangle()
+                        .foregroundColor(.secondary)
+                        .frame(height: Constants.frameHeight)
+                }
+                if let bio = user.bio {
+                    Text(bio).padding()
+                }
+                Spacer()
             }
-            Spacer()
+            .navigationTitle(user.login)
+            .navigationBarTitleDisplayMode(.inline)
         }
-        .navigationTitle(user.login)
-        .navigationBarTitleDisplayMode(.inline)
     }
     
     private struct Constants {
@@ -33,8 +39,9 @@ struct DetailView: View {
 }
 
 #Preview {
-    let user = GithubUser(login: "Ali", avatarUrl: "https://avatars.githubusercontent.com/u/2465559?v=4")
+    let user = GithubUser(login: "Ali", avatarUrl: "https://avatars.githubusercontent.com/u/2465559?v=4", bio: "Bio")
+    let viewModel = DetailViewModel(githubUser: user)
     return NavigationStack {
-        DetailView(user: user)
+        DetailView(viewModel: viewModel)
     }
 }

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct UserColumn: View {
     let user: GithubUser
+    @Binding var navigationPath: [NavigationPath]
     
     var body: some View {
         let shape = RoundedRectangle(cornerRadius: Constants.cornerRadius)
@@ -26,6 +27,9 @@ struct UserColumn: View {
             Text(user.login)
                 .font(.title3)
         }.padding()
+            .onTapGesture {
+                navigationPath.append(.detail(user: user))
+            }
     }
     
     private struct Constants {
@@ -35,6 +39,7 @@ struct UserColumn: View {
 }
 
 #Preview {
-    let user = GithubUser(login: "Ali", avatarUrl: "https://avatars.githubusercontent.com/u/2465559?v=4")
-    return UserColumn(user: user)
+    let user = GithubUser(login: "Ali", avatarUrl: "https://avatars.githubusercontent.com/u/2465559?v=4", bio: "Bio")
+    @State var navigationPath = [NavigationPath]()
+    return UserColumn(user: user, navigationPath: $navigationPath)
 }

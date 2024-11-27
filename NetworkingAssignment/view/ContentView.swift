@@ -9,39 +9,39 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @ObservedObject var viewModel: GithubViewModel
+    @ObservedObject var viewModel: MainViewModel
+    @Binding var navigationPath: [NavigationPath]
     
     var body: some View {
         AsyncContentView(viewState: viewModel.viewState) {
-            NavigationStack {
-                ScrollView {
-                    LazyVGrid(columns: [GridItem(.adaptive(minimum: Constants.gridItemSize))]) {
-                        ForEach(viewModel.users) { userWrapper in
-                            Section(userWrapper.section) {
-                                ForEach(userWrapper.users, id: \.self.login) { user in
-                                    NavigationLink(value: user)  {
-                                        UserColumn(user: user)
-                                    }
-                                }
+            
+            ScrollView {
+                LazyVGrid(columns: [GridItem(.adaptive(minimum: Constants.gridItemSize))]) {
+                    ForEach(viewModel.users) { userWrapper in
+                        Section(userWrapper.section) {
+                            ForEach(userWrapper.users, id: \.self.login) { user in
+                                UserColumn(user: user, navigationPath: $navigationPath)
                             }
                         }
-                    }.navigationDestination(for: GithubUser.self) { user in
-                        DetailView(user: user)
                     }
-                    .navigationTitle("List")
                 }
             }
+            .navigationTitle("Alirezaiii")
+            .navigationBarTitleDisplayMode(.inline)
         } onRetry: {
-            viewModel.refresh()
-        }
-    }
-    
-    private struct Constants {
-        static let gridItemSize: Double = 180
+        viewModel.refresh()
     }
 }
 
+private struct Constants {
+    static let gridItemSize: Double = 180
+}
+}
+
 #Preview {
-    let viewModel = GithubViewModel()
-    return ContentView(viewModel: viewModel)
+    let viewModel = MainViewModel()
+    @State var navigationPath = [NavigationPath]()
+    return NavigationStack {
+        ContentView(viewModel: viewModel, navigationPath: $navigationPath)
+    }
 }

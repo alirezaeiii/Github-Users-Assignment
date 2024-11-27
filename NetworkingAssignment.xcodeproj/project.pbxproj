@@ -11,12 +11,13 @@
 		41901C6D2CDFDF34006830BA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41901C6C2CDFDF34006830BA /* ContentView.swift */; };
 		41901C6F2CDFDF35006830BA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 41901C6E2CDFDF35006830BA /* Assets.xcassets */; };
 		41901C722CDFDF35006830BA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 41901C712CDFDF35006830BA /* Preview Assets.xcassets */; };
-		41901C7B2CE0B95B006830BA /* GithubViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41901C7A2CE0B95B006830BA /* GithubViewModel.swift */; };
+		41901C7B2CE0B95B006830BA /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41901C7A2CE0B95B006830BA /* MainViewModel.swift */; };
 		41901C7D2CE0B99E006830BA /* GithubUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41901C7C2CE0B99E006830BA /* GithubUser.swift */; };
 		41901C7F2CE1173A006830BA /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41901C7E2CE1173A006830BA /* DetailView.swift */; };
 		41901C812CE13447006830BA /* UserWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41901C802CE13447006830BA /* UserWrapper.swift */; };
 		41D0DCD92CE69EA3002793E8 /* UserColumn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D0DCD82CE69EA3002793E8 /* UserColumn.swift */; };
 		41D0DD092CF73D3D002793E8 /* AsyncContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D0DD082CF73D3D002793E8 /* AsyncContentView.swift */; };
+		41D0DD0C2CF765F2002793E8 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D0DD0B2CF765F2002793E8 /* DetailViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,12 +26,13 @@
 		41901C6C2CDFDF34006830BA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		41901C6E2CDFDF35006830BA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		41901C712CDFDF35006830BA /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		41901C7A2CE0B95B006830BA /* GithubViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubViewModel.swift; sourceTree = "<group>"; };
+		41901C7A2CE0B95B006830BA /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		41901C7C2CE0B99E006830BA /* GithubUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubUser.swift; sourceTree = "<group>"; };
 		41901C7E2CE1173A006830BA /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		41901C802CE13447006830BA /* UserWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserWrapper.swift; sourceTree = "<group>"; };
 		41D0DCD82CE69EA3002793E8 /* UserColumn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserColumn.swift; sourceTree = "<group>"; };
 		41D0DD082CF73D3D002793E8 /* AsyncContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncContentView.swift; sourceTree = "<group>"; };
+		41D0DD0B2CF765F2002793E8 /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,9 +65,8 @@
 		41901C692CDFDF34006830BA /* NetworkingAssignment */ = {
 			isa = PBXGroup;
 			children = (
-				41D0DD072CE8AA0E002793E8 /* detail */,
 				41D0DCD42CE69B51002793E8 /* model */,
-				41D0DCD62CE69BAA002793E8 /* main */,
+				41D0DCD62CE69BAA002793E8 /* view */,
 				41901C6A2CDFDF34006830BA /* NetworkingAssignmentApp.swift */,
 				41901C6E2CDFDF35006830BA /* Assets.xcassets */,
 				41901C702CDFDF35006830BA /* Preview Content */,
@@ -84,29 +85,31 @@
 		41D0DCD42CE69B51002793E8 /* model */ = {
 			isa = PBXGroup;
 			children = (
-				41901C7A2CE0B95B006830BA /* GithubViewModel.swift */,
 				41901C802CE13447006830BA /* UserWrapper.swift */,
 				41901C7C2CE0B99E006830BA /* GithubUser.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
 		};
-		41D0DCD62CE69BAA002793E8 /* main */ = {
+		41D0DCD62CE69BAA002793E8 /* view */ = {
 			isa = PBXGroup;
 			children = (
+				41D0DD0A2CF75D2B002793E8 /* viewmodel */,
+				41D0DD082CF73D3D002793E8 /* AsyncContentView.swift */,
 				41901C6C2CDFDF34006830BA /* ContentView.swift */,
 				41D0DCD82CE69EA3002793E8 /* UserColumn.swift */,
-				41D0DD082CF73D3D002793E8 /* AsyncContentView.swift */,
-			);
-			path = main;
-			sourceTree = "<group>";
-		};
-		41D0DD072CE8AA0E002793E8 /* detail */ = {
-			isa = PBXGroup;
-			children = (
 				41901C7E2CE1173A006830BA /* DetailView.swift */,
 			);
-			path = detail;
+			path = view;
+			sourceTree = "<group>";
+		};
+		41D0DD0A2CF75D2B002793E8 /* viewmodel */ = {
+			isa = PBXGroup;
+			children = (
+				41901C7A2CE0B95B006830BA /* MainViewModel.swift */,
+				41D0DD0B2CF765F2002793E8 /* DetailViewModel.swift */,
+			);
+			path = viewmodel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -183,7 +186,8 @@
 				41901C7F2CE1173A006830BA /* DetailView.swift in Sources */,
 				41901C6B2CDFDF34006830BA /* NetworkingAssignmentApp.swift in Sources */,
 				41901C7D2CE0B99E006830BA /* GithubUser.swift in Sources */,
-				41901C7B2CE0B95B006830BA /* GithubViewModel.swift in Sources */,
+				41D0DD0C2CF765F2002793E8 /* DetailViewModel.swift in Sources */,
+				41901C7B2CE0B95B006830BA /* MainViewModel.swift in Sources */,
 				41D0DD092CF73D3D002793E8 /* AsyncContentView.swift in Sources */,
 				41901C812CE13447006830BA /* UserWrapper.swift in Sources */,
 				41D0DCD92CE69EA3002793E8 /* UserColumn.swift in Sources */,
