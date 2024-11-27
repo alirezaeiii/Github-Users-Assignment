@@ -13,25 +13,27 @@ class GithubViewModel : ObservableObject {
     /// A logger for debugging.
         fileprivate let logger = Logger(subsystem: "com.sample.NetworkingAssignment", category: "parsing")
     
-    @Published var result = Resource.loading
+    @Published var viewState: ViewState = .loading
+    @Published var users: [UserWrapper] = []
     
     init() {
         refresh()
     }
     
     func refresh() {
-        result = Resource.loading
+        viewState = .loading
         Task { @MainActor in
             async let following = GithubUser.getUsers(endPoint: Constants.followingEndPoint)
             async let followers = GithubUser.getUsers(endPoint: Constants.followersEndPoint)
             do {
                 logger.debug("Refreshing the data ...")
                 let (fetchedFollowing, fetchedFollowers) = try await (following, followers)
-                result = Resource.success(UserWrapper.createUsers(following: fetchedFollowing, followers: fetchedFollowers))
+                users = UserWrapper.createUsers(following: fetchedFollowing, followers: fetchedFollowers)
                 logger.debug("Refresh complete.")
+                self.viewState = .completed
             } catch {
                 logger.error("\(error.localizedDescription)")
-                result = Resource.error("Something went wrong")
+                viewState = .failure(error: error)
             }
         }
     }
@@ -40,11 +42,5 @@ class GithubViewModel : ObservableObject {
         private static let endPoint = "https://api.github.com/users/alirezaeiii/"
         static let followingEndPoint = endPoint + "following"
         static let followersEndPoint = endPoint + "followers"
-    }
-    
-    enum Resource {
-        case loading
-        case success([UserWrapper])
-        case error(String)
     }
 }

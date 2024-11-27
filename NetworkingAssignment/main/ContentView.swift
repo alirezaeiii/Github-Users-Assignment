@@ -8,26 +8,15 @@
 import SwiftUI
 
 struct ContentView: View {
-    typealias Resource = GithubViewModel.Resource
     
     @ObservedObject var viewModel: GithubViewModel
     
     var body: some View {
-        switch viewModel.result {
-        case Resource.loading : ProgressView()
-        case Resource.error(let message):
-            VStack {
-                Text(message)
-                    .padding(.vertical)
-                Button("Retry") {
-                    viewModel.refresh()
-                }
-            }
-        case Resource.success(let userWrappers):
+        AsyncContentView(viewState: viewModel.viewState) {
             NavigationStack {
                 ScrollView {
                     LazyVGrid(columns: [GridItem(.adaptive(minimum: Constants.gridItemSize))]) {
-                        ForEach(userWrappers) { userWrapper in
+                        ForEach(viewModel.users) { userWrapper in
                             Section(userWrapper.section) {
                                 ForEach(userWrapper.users, id: \.self.login) { user in
                                     NavigationLink(value: user)  {
@@ -42,6 +31,8 @@ struct ContentView: View {
                     .navigationTitle("List")
                 }
             }
+        } onRetry: {
+            viewModel.refresh()
         }
     }
     
