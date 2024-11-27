@@ -29,13 +29,13 @@ struct ContentView: View {
             .navigationTitle("Alirezaiii")
             .navigationBarTitleDisplayMode(.inline)
         } onRetry: {
-        viewModel.refresh()
+            viewModel.refresh()
+        }
     }
-}
-
-private struct Constants {
-    static let gridItemSize: Double = 180
-}
+    
+    private struct Constants {
+        static let gridItemSize: Double = 180
+    }
 }
 
 #Preview {
