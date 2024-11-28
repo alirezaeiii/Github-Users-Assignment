@@ -8,12 +8,11 @@
 import Foundation
 
 struct GithubRequest: RequestProtocol {
-    let endpoint: Endpoint
     let httpMethod: HTTPMethod = .GET
     let url: URL?
     
     init(path: GithubEndpoint.Paths) {
-        self.endpoint = GithubEndpoint.github(path: path)
+        let endpoint = GithubEndpoint.github(path: path)
         self.url = DefaultURLFactory.createURL(from: endpoint)
     }
 

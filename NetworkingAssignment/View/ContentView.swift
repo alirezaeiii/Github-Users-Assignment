@@ -14,7 +14,6 @@ struct ContentView: View {
     
     var body: some View {
         AsyncContentView(viewState: viewModel.viewState) {
-            
             ScrollView {
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: Constants.gridItemSize))]) {
                     ForEach(viewModel.users) { userWrapper in

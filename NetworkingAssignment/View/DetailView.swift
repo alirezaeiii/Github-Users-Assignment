@@ -13,25 +13,25 @@ struct DetailView: View {
     
     var body: some View {
         AsyncContentView(viewState: viewModel.viewState) {
-                VStack {
-                    if let user = viewModel.user {
-                        AsyncImage(url: URL(string: user.avatarUrl)) { image in
-                            image
-                                .resizable()
-                                .scaledToFit()
-                        } placeholder: {
-                            Rectangle()
-                                .foregroundColor(.secondary)
-                                .frame(height: Constants.frameHeight)
-                        }
-                        if let bio = user.bio {
-                            Text(bio).padding()
-                        }
+            VStack {
+                if let user = viewModel.user {
+                    AsyncImage(url: URL(string: user.avatarUrl)) { image in
+                        image
+                            .resizable()
+                            .scaledToFit()
+                    } placeholder: {
+                        Rectangle()
+                            .foregroundColor(.secondary)
+                            .frame(height: Constants.frameHeight)
                     }
-                    Spacer()
+                    if let bio = user.bio {
+                        Text(bio).padding()
+                    }
                 }
-                .navigationTitle(viewModel.user?.login ?? "")
-                .navigationBarTitleDisplayMode(.inline)
+                Spacer()
+            }
+            .navigationTitle(viewModel.user?.login ?? "")
+            .navigationBarTitleDisplayMode(.inline)
         } onRetry: {
             viewModel.refresh()
         }

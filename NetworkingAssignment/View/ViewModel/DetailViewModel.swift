@@ -9,7 +9,7 @@ import Foundation
 
 class DetailViewModel: ObservableObject {
     private let networkService: NetworkServiceProtocol
-    let githubUser: GithubUser
+    private let githubUser: GithubUser
     
     @Published var viewState: ViewState = .loading
     @Published var user: GithubUser?

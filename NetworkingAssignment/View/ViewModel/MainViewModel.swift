@@ -1,12 +1,11 @@
 //
-//  SubViewModel.swift
+//  MainViewModel.swift
 //  NetworkingAssignment
 //
 //  Created by Ali on 11/11/24.
 //
 
 import Foundation
-import OSLog
 
 class MainViewModel : ObservableObject {
     private let networkService: NetworkServiceProtocol
