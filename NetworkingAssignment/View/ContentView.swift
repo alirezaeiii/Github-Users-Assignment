@@ -28,7 +28,11 @@ struct ContentView: View {
             .navigationTitle("Alirezaiii")
             .navigationBarTitleDisplayMode(.inline)
         } onRetry: {
-            viewModel.refresh()
+            Task {
+                await viewModel.refresh()
+            }
+        }.task {
+            await viewModel.refresh()
         }
     }
     

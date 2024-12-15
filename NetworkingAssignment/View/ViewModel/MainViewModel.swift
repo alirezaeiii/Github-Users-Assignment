@@ -15,24 +15,22 @@ class MainViewModel : ObservableObject {
     
     init(networkService: NetworkServiceProtocol) {
         self.networkService = networkService
-        refresh()
     }
     
-    func refresh() {
+    func refresh() async {
         viewState = .loading
         let followingRequest = GithubRequest(path: .following)
         let followersRequest = GithubRequest(path: .followers)
-        Task { @MainActor in
-            async let following: [GithubUser] = networkService.perform(request: followingRequest)
-            async let followers: [GithubUser] = networkService.perform(request: followersRequest)
-            do {
-                let (fetchedFollowing, fetchedFollowers) = try await (following, followers)
-                users = UserWrapper.createUsers(following: fetchedFollowing, followers: fetchedFollowers)
-                self.viewState = .completed
-            } catch {
-                viewState = .failure(error: error)
-            }
+        async let following: [GithubUser] = networkService.perform(request: followingRequest)
+        async let followers: [GithubUser] = networkService.perform(request: followersRequest)
+        do {
+            let (fetchedFollowing, fetchedFollowers) = try await (following, followers)
+            users = UserWrapper.createUsers(following: fetchedFollowing, followers: fetchedFollowers)
+            self.viewState = .completed
+        } catch {
+            viewState = .failure(error: error)
         }
+        
     }
-
+    
 }

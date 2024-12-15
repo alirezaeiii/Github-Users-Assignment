@@ -33,7 +33,11 @@ struct DetailView: View {
             .navigationTitle(viewModel.user?.login ?? "")
             .navigationBarTitleDisplayMode(.inline)
         } onRetry: {
-            viewModel.refresh()
+            Task {
+                await viewModel.refresh()
+            }
+        }.task {
+            await viewModel.refresh()
         }
     }
     
