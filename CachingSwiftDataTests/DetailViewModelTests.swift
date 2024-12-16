@@ -37,6 +37,7 @@ final class DetailViewModelTests: XCTestCase {
         XCTAssertNotNil(viewModel.user)
         XCTAssertEqual(viewModel.user?.login, "testUser")
         XCTAssertEqual(viewModel.user?.avatarUrl, "https://example.com/avatar.png")
+        XCTAssertEqual(viewModel.user?.bio, "bio")
     }
     
     func testUpdateNetworkFailure() async {
