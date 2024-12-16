@@ -19,6 +19,7 @@ class DetailViewModel: ObservableObject {
         self.githubUser = githubUser
     }
     
+    @MainActor
     func refresh() async {
         viewState = .loading
         let request = GithubRequest(path: .user(login: githubUser.login))

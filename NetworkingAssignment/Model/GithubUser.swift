@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct GithubUser: Decodable, Hashable {
+struct GithubUser: Codable, Hashable {
     let login: String
     let avatarUrl: String
     let bio: String?

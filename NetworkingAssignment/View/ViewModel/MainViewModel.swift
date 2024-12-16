@@ -17,6 +17,7 @@ class MainViewModel : ObservableObject {
         self.networkService = networkService
     }
     
+    @MainActor
     func refresh() async {
         viewState = .loading
         let followingRequest = GithubRequest(path: .following)
@@ -30,7 +31,5 @@ class MainViewModel : ObservableObject {
         } catch {
             viewState = .failure(error: error)
         }
-        
     }
-    
 }
