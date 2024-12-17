@@ -4,7 +4,6 @@ A sample showcases Swift, SwiftUI, MVVM, Networking and GridView with multiple s
 ## Libraries
 * [Swift](https://developer.apple.com/swift/) is a powerful and intuitive programming language for all Apple platforms.
 * [SwiftUI](https://developer.apple.com/xcode/swiftui/) is an innovative, exceptionally simple way to build user interfaces across all Apple platforms with the power of Swift.
-* [SwiftData](https://developer.apple.com/xcode/swiftdata/) offers an expressive and lightweight API for modeling and persisting your app's data using pure Swift code.
 * [async-await](https://developer.apple.com/documentation/swift/updating_an_app_to_use_swift_concurrency) is a mechanism used to create and execute asynchronous functions in Swift.
 * [ObservableObject](https://developer.apple.com/documentation/combine/observableobject) is a type of object with a publisher that emits before the object has changed.
 
