@@ -40,7 +40,7 @@ final class DetailViewModelTests: XCTestCase {
         XCTAssertEqual(viewModel.user?.bio, "bio")
     }
     
-    func testUpdateNetworkFailure() async {
+    func testRefreshWithNetworkFailure() async {
         let error = NSError(domain: "TestError", code: 400, userInfo: [NSLocalizedDescriptionKey: "Bad Request"])
         mockNetworkService.mockError = error
         
@@ -51,7 +51,7 @@ final class DetailViewModelTests: XCTestCase {
         
     }
     
-    func testUpdateDecodingError() async {
+    func testRefreshWithDecodingError() async {
         mockNetworkService.mockData = Data("Invalid JSON".utf8) // Invalid JSON
         
         XCTAssertEqual(viewModel.viewState, .loading)

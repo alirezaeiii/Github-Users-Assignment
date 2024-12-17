@@ -24,8 +24,6 @@ final class MockNetworkService: NetworkServiceProtocol {
     
     func perform<T: Decodable>(request: RequestProtocol) async throws -> T {
         let data = try await perform(request: request)
-        let decoder = JSONDecoder()
-        decoder.keyDecodingStrategy = .convertFromSnakeCase
-        return try decoder.decode(T.self, from: data)
+        return try JSONDecoder().decode(T.self, from: data)
     }
 }
