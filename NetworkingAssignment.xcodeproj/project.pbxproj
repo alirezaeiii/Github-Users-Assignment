@@ -88,7 +88,7 @@
 			isa = PBXGroup;
 			children = (
 				41901C692CDFDF34006830BA /* NetworkingAssignment */,
-				41D0DD7F2D104CEC002793E8 /* CachingSwiftDataTests */,
+				41D0DD7F2D104CEC002793E8 /* NetworkingAssignmentTests */,
 				41901C682CDFDF34006830BA /* Products */,
 			);
 			sourceTree = "<group>";
@@ -183,14 +183,14 @@
 			path = Endpoint;
 			sourceTree = "<group>";
 		};
-		41D0DD7F2D104CEC002793E8 /* CachingSwiftDataTests */ = {
+		41D0DD7F2D104CEC002793E8 /* NetworkingAssignmentTests */ = {
 			isa = PBXGroup;
 			children = (
 				41D0DD872D104D30002793E8 /* Mock */,
 				41D0DD802D104CEC002793E8 /* MainViewModelTests.swift */,
 				41D0DD8A2D105AAF002793E8 /* DetailViewModelTests.swift */,
 			);
-			path = CachingSwiftDataTests;
+			path = NetworkingAssignmentTests;
 			sourceTree = "<group>";
 		};
 		41D0DD872D104D30002793E8 /* Mock */ = {
